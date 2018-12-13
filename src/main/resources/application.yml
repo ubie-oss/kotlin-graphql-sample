@@ -1,0 +1,26 @@
+server:
+  port: 8089
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://sample-db:5432/postgres
+    username: postgres
+    password:
+  cloud:
+    gcp:
+      trace:
+        enabled: false
+      logging:
+        enabled: false
+  sleuth:
+    sampler:
+      probability: 1.0
+  profiles:
+    active: development
+graphiql:
+  enabled: true
+debug: true
+logging:
+  level:
+    root: INFO
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG

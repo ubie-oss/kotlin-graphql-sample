@@ -1,0 +1,28 @@
+type Query {
+    # 薬を取得します
+    drugs(yjCode: String!) : [Drug!]
+    # 病気を取得します
+    diseases(icd: String!) : [Disease!]
+}
+
+# 薬情報
+type Drug {
+    # 薬品名
+    name: String!
+    # YJ Code。だいたい薬を表すために使われるCode。一意ではないので注意
+    yjCode: String!
+    # 併用禁忌薬
+    kinkiDrugs: [Drug!]
+    # 処方してはいけない特定の病気
+    kinkiDiseases: [Disease!]
+} 
+
+# 病気
+type Disease {
+    # 傷病に対してつくコード。一意ではないので注意
+    icd: String!
+    # 病名
+    name: String!
+    # 処方されてはいけない薬
+    kinkiDrugs: [Drug!]
+}
