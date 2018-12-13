@@ -2,13 +2,25 @@
 
 これはUbieが開発しているKotlin+SpringBoot+GraphQLのサンプル実装です。
 
-## 開発中のアプリケーション起動
+## 環境構築
+
+### Docker
+
+`docker-compose`を利用して`Docker`を立ち上げています。それぞれインストールして下さい。 https://docs.docker.com/compose/install/
+
+### Editor
+
+どのようなEditorを使っても構いませんが、Ubieでは主にIntellij Ultimateを利用しています。
+
+## 起動方法
+
+以下のコマンドを実行します。
 
 ```
 docker-compose up
 ```
 
-起動した状態で http://localhost:9099/graphiql にアクセスすると、GraphiQLにアクセス出来ます。
+起動した状態で http://localhost:8090/graphiql にアクセスすると、GraphiQLにアクセス出来ます。
 
 ## テスト
 
