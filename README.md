@@ -1,5 +1,7 @@
 # kotlin-graphql-sample
 
+[![CircleCI](https://circleci.com/gh/ubie-inc/kotlin-graphql-sample.svg?style=svg)](https://circleci.com/gh/ubie-inc/kotlin-graphql-sample)
+
 これはUbieが開発しているKotlin+SpringBoot+GraphQLのサンプル実装です。
 
 ## 環境構築
