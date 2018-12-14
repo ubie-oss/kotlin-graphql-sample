@@ -4,6 +4,10 @@
 
 これはUbieが開発しているKotlin+SpringBoot+GraphQLのサンプル実装です。
 
+## DB
+
+![E-R図](https://raw.githubusercontent.com/wiki/ubie-inc/kotlin-graphql-sample/images/er.png)
+
 ## 環境構築
 
 ### Docker
@@ -61,3 +65,10 @@ docker exec -it sample-app ./gradlew jacocoTestReport
 
 https://github.com/ubie-inc/kotlin-coding-style
 
+## Contribution
+
+このプロジェクトはUbieの環境と同期させるため、Ubieの環境と大きく離れてしまう修正は取り込む事が出来ません。
+
+しかし、パッケージ変更を含まない修正であればどんどん取り込みますので、Pull Requestお待ちしております。
+
+もし、どうすればいいかわからないという場合は、一旦issueを挙げてもらえると良いです。日本語か英語どちらでも構いません。
