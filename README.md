@@ -33,7 +33,7 @@ docker-compose up
 ### テストの実行
 
 ```
-docker exec -it -app ./gradlew test
+docker exec -it sample-app ./gradlew test
 ```
 
 上記コマンドにより、テストが実行され、レポートが`build/reports/tests/test/index.html`として出力されます。
