@@ -9,9 +9,9 @@ spring:
   cloud:
     gcp:
       trace:
-        enabled: false
+        enabled: true
       logging:
-        enabled: false
+        enabled: true
   sleuth:
     sampler:
       probability: 1.0
@@ -24,3 +24,4 @@ logging:
   level:
     root: INFO
     org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    graphql.GraphQL: DEBUG

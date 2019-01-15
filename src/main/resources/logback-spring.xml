@@ -1,13 +1,9 @@
 <configuration>
 
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+    <include resource="org/springframework/cloud/gcp/autoconfigure/logging/logback-appender.xml" />
 
     <root level="INFO">
-        <appender-ref ref="Console"/>
+        <appender-ref ref="STACKDRIVER" />
     </root>
 
 </configuration>
