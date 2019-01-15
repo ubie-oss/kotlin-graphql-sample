@@ -32,6 +32,7 @@ jacoco {
 repositories {
     mavenCentral()
     jcenter()
+    maven(url = "http://repo.spring.io/libs-milestone")
 }
 
 dependencies {
@@ -48,6 +49,15 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-jdbc")
     compile("org.flywaydb:flyway-core")
     runtime("org.postgresql:postgresql")
+
+    // ログ
+    val springCloudGcpVersion = "1.1.0.RC2"
+    compile("org.springframework.cloud:spring-cloud-gcp-starter-logging:$springCloudGcpVersion")
+    compile("org.springframework.cloud:spring-cloud-gcp-starter-trace:$springCloudGcpVersion") {
+        // remove this after 1.1.0.RELEASE
+        exclude(group = "io.grpc")
+    }
+    compile("app.ubie:brave-kt:1.0.0")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
