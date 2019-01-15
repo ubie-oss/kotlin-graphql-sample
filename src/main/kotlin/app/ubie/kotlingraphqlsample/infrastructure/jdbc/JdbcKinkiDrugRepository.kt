@@ -2,6 +2,8 @@ package app.ubie.kotlingraphqlsample.infrastructure.jdbc
 
 import app.ubie.kotlingraphqlsample.domain.KinkiDrug
 import app.ubie.kotlingraphqlsample.domain.KinkiDrugRepository
+import brave.Tracing
+import brave.scopedSpan
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
@@ -17,9 +19,10 @@ class JdbcKinkiDrugRepository(private val jdbcTemplate: NamedParameterJdbcTempla
     }
 
     override fun findKinkiDrugsByYjCode(yjCode: String): List<KinkiDrug> {
-        if (yjCode.isEmpty()) return emptyList()
-        //language=SQL
-        return jdbcTemplate.query(
+        return Tracing.currentTracer().scopedSpan("findKinkiDrugsByYjCode") {
+            if (yjCode.isEmpty()) return emptyList()
+            //language=SQL
+            jdbcTemplate.query(
                 """
                 SELECT
                   yj_code,
@@ -29,6 +32,7 @@ class JdbcKinkiDrugRepository(private val jdbcTemplate: NamedParameterJdbcTempla
                 WHERE
                   yj_code = :yj_code
                 """.trimIndent(), mapOf("yj_code" to yjCode), rowMapper
-        )
+            )
+        }
     }
 }

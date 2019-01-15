@@ -2,6 +2,8 @@ package app.ubie.kotlingraphqlsample.infrastructure.jdbc
 
 import app.ubie.kotlingraphqlsample.domain.DiseaseKinkiDrug
 import app.ubie.kotlingraphqlsample.domain.DiseaseKinkiDrugRepository
+import brave.Tracing
+import brave.scopedSpan
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
@@ -17,8 +19,9 @@ class JdbcDiseaseKinkiDrugRepository(private val jdbcTemplate: NamedParameterJdb
     }
 
     override fun findKinkiDrugsByIcd(icd: String): List<DiseaseKinkiDrug> {
-        if (icd.isBlank()) return emptyList()
-        return jdbcTemplate.query(
+        return Tracing.currentTracer().scopedSpan("findKinkiDrugsByIcd") {
+            if (icd.isBlank()) return emptyList()
+            jdbcTemplate.query(
                 //language=SQL
                 """
                 SELECT
@@ -29,12 +32,14 @@ class JdbcDiseaseKinkiDrugRepository(private val jdbcTemplate: NamedParameterJdb
                 WHERE
                   icd = :icd
                 """.trimIndent(), mapOf("icd" to icd), rowMapper
-        )
+            )
+        }
     }
 
     override fun findKinkiDrugsByYjCode(yjCode: String): List<DiseaseKinkiDrug> {
-        if (yjCode.isBlank()) return emptyList()
-        return jdbcTemplate.query(
+        return Tracing.currentTracer().scopedSpan("findKinkiDrugsByYjCode") {
+            if (yjCode.isBlank()) return emptyList()
+            jdbcTemplate.query(
                 //language=SQL
                 """
                 SELECT
@@ -45,6 +50,7 @@ class JdbcDiseaseKinkiDrugRepository(private val jdbcTemplate: NamedParameterJdb
                 WHERE
                   yj_code = :yj_code
                 """.trimIndent(), mapOf("yj_code" to yjCode), rowMapper
-        )
+            )
+        }
     }
 }

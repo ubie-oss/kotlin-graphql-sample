@@ -2,6 +2,8 @@ package app.ubie.kotlingraphqlsample.infrastructure.jdbc
 
 import app.ubie.kotlingraphqlsample.domain.Disease
 import app.ubie.kotlingraphqlsample.domain.DiseaseRepository
+import brave.Tracing
+import brave.scopedSpan
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Component
@@ -16,9 +18,10 @@ class JdbcDiseaseRepository(private val jdbcTemplate: NamedParameterJdbcTemplate
     }
 
     override fun getDiseases(icd: String): List<Disease> {
-        if (icd.isBlank()) return emptyList()
-        //language=SQL
-        return jdbcTemplate.query(
+        return Tracing.currentTracer().scopedSpan("getDiseases(icd)") {
+            if (icd.isBlank()) return emptyList()
+            //language=SQL
+            jdbcTemplate.query(
                 """
                 SELECT
                   icd,
@@ -27,14 +30,17 @@ class JdbcDiseaseRepository(private val jdbcTemplate: NamedParameterJdbcTemplate
                   disease
                 WHERE
                   icd = :icd
-                """.trimIndent(), mapOf("icd" to icd), rowMapper)
+                """.trimIndent(), mapOf("icd" to icd), rowMapper
+            )
+        }
     }
 
     override fun getDiseases(icds: List<String>): List<Disease> {
-        val targets = icds.filterNot { it.isBlank() }
-        if (targets.isEmpty()) return emptyList()
-        //language=SQL
-        return jdbcTemplate.query(
+        return Tracing.currentTracer().scopedSpan("getDiseases(icds)") {
+            val targets = icds.filterNot { it.isBlank() }
+            if (targets.isEmpty()) return emptyList()
+            //language=SQL
+            jdbcTemplate.query(
                 """
                 SELECT
                   icd,
@@ -43,6 +49,8 @@ class JdbcDiseaseRepository(private val jdbcTemplate: NamedParameterJdbcTemplate
                   disease
                 WHERE
                   icd IN (:icd)
-                """.trimIndent(), mapOf("icd" to targets), rowMapper)
+                """.trimIndent(), mapOf("icd" to targets), rowMapper
+            )
+        }
     }
 }
