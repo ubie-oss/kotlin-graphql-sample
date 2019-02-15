@@ -8,11 +8,25 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class JdbcDrugRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) : DrugRepository {
+    override fun updatePrice(yjCode: String, newPrice: Int) {
+        if(yjCode.isBlank()) return
+
+        jdbcTemplate.update(
+            //language=SQL
+            """
+            UPDATE drug
+            SET price = :price
+            WHERE
+              yj_code = :yj_code
+            """.trimIndent(), mapOf("price" to newPrice, "yj_code" to yjCode)
+        )
+    }
 
     private val rowMapper: RowMapper<Drug> = RowMapper { rs, _ ->
         Drug(
                 name = rs.getString("name"),
-                yjCode = rs.getString("yj_code")
+                yjCode = rs.getString("yj_code"),
+                price = rs.getInt("price")
         )
     }
 
@@ -23,7 +37,8 @@ class JdbcDrugRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) :
                 """
                 SELECT
                   name,
-                  yj_code
+                  yj_code,
+                  price
                 FROM
                   drug
                 WHERE
@@ -40,7 +55,8 @@ class JdbcDrugRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) :
                 """
                 SELECT
                   name,
-                  yj_code
+                  yj_code,
+                  price
                 FROM
                   drug
                 WHERE
