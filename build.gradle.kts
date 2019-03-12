@@ -21,7 +21,9 @@ tasks.withType<KotlinCompile> {
 }
 
 val test by tasks.getting(Test::class) {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeEngines = setOf("spek2")
+    }
     maxHeapSize = "3g"
 }
 
@@ -64,4 +66,9 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.11.1")
     testImplementation("io.mockk:mockk:1.8.9.kotlin13")
     testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
+
+    val spekVersion: String by project
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
+
 }
