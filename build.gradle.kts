@@ -29,6 +29,13 @@ jacoco {
     toolVersion = "0.8.2"
 }
 
+val jacocoTestReport by tasks.getting(JacocoReport::class) {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
+}
+
 repositories {
     mavenCentral()
     jcenter()
@@ -37,17 +44,24 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    compile("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter")
 
-    val graphqlSpringVersion = "5.0.4"
-    compile("com.graphql-java-kickstart:graphql-spring-boot-starter:$graphqlSpringVersion")
-    compile("com.graphql-java-kickstart:graphiql-spring-boot-starter:$graphqlSpringVersion")
-    compile("com.graphql-java-kickstart:graphql-java-tools:5.3.3")
+    val graphqlSpringVersion: String by project
+    implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:$graphqlSpringVersion")
+    implementation("com.graphql-java-kickstart:graphiql-spring-boot-starter:$graphqlSpringVersion")
+    implementation("com.graphql-java-kickstart:graphql-java-tools:5.3.3")
 
     // データベース
-    compile("org.springframework.boot:spring-boot-starter-jdbc")
-    compile("org.flywaydb:flyway-core")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.flywaydb:flyway-core")
     runtime("org.postgresql:postgresql")
 
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    // test
+    val junitVersion: String by project
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.assertj:assertj-core:3.11.1")
+    testImplementation("io.mockk:mockk:1.8.9.kotlin13")
+    testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
 }
