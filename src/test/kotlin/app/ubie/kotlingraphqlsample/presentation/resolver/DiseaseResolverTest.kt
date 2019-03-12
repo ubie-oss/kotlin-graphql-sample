@@ -11,17 +11,17 @@ import io.mockk.slot
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 
-class DiseaseResolverTest {
-    private val service: DiseaseKinkiDrugService = mockk()
-    private val drugService: DrugService = mockk()
+object DiseaseResolverTest : Spek({
+    describe("getKinkiDrugs") {
+        val service: DiseaseKinkiDrugService = mockk()
+        val drugService: DrugService = mockk()
 
-    private val resolver: DiseaseResolver = DiseaseResolver(service, drugService)
+        val resolver = DiseaseResolver(service, drugService)
 
-    @Nested
-    inner class getKinkiDrugs {
-        @Test
-        fun `should get kinki drugs`() {
+        it("should get kinki drugs") {
             val disease: Disease = mockk()
             every { disease.icd } returns "icd"
             val kinkiDrugs: DiseaseKinkiDrug = mockk()
@@ -41,8 +41,7 @@ class DiseaseResolverTest {
                 .containsOnly("yjCode")
         }
 
-        @Test
-        fun `should not throw Exception if no kinkiDrugs found`() {
+        it("should not throw Exception if no kinkiDrugs found") {
             val disease: Disease = mockk()
             every { disease.icd } returns "icd"
             val icdSlot = slot<String>()
@@ -56,4 +55,4 @@ class DiseaseResolverTest {
             Assertions.assertThat(yjCodesSlot.captured).isEmpty()
         }
     }
-}
+})
