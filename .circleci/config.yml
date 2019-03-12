@@ -46,6 +46,10 @@ jobs:
           name: テスト
           command: ./gradlew test jacocoTestReport --no-daemon --max-workers 2
 
+      - run:
+          name: codecov
+          command: bash <(curl -s https://codecov.io/bash)
+
       - store_test_results:
           path: build/test-results
 

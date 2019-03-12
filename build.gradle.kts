@@ -29,6 +29,13 @@ jacoco {
     toolVersion = "0.8.2"
 }
 
+val jacocoTestReport by tasks.getting(JacocoReport::class) {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
+}
+
 repositories {
     mavenCentral()
     jcenter()
