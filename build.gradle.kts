@@ -44,16 +44,16 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    compile("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter")
 
-    val graphqlSpringVersion = "5.0.4"
-    compile("com.graphql-java-kickstart:graphql-spring-boot-starter:$graphqlSpringVersion")
-    compile("com.graphql-java-kickstart:graphiql-spring-boot-starter:$graphqlSpringVersion")
-    compile("com.graphql-java-kickstart:graphql-java-tools:5.3.3")
+    val graphqlSpringVersion: String by project
+    implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:$graphqlSpringVersion")
+    implementation("com.graphql-java-kickstart:graphiql-spring-boot-starter:$graphqlSpringVersion")
+    implementation("com.graphql-java-kickstart:graphql-java-tools:5.3.3")
 
     // データベース
-    compile("org.springframework.boot:spring-boot-starter-jdbc")
-    compile("org.flywaydb:flyway-core")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.flywaydb:flyway-core")
     runtime("org.postgresql:postgresql")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
