@@ -56,5 +56,12 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     runtime("org.postgresql:postgresql")
 
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    // test
+    val junitVersion: String by project
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.assertj:assertj-core:3.11.1")
+    testImplementation("io.mockk:mockk:1.8.9.kotlin13")
+    testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
 }
