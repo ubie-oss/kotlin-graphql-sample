@@ -49,7 +49,7 @@ dependencies {
     val graphqlSpringVersion: String by project
     implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:$graphqlSpringVersion")
     implementation("com.graphql-java-kickstart:graphiql-spring-boot-starter:$graphqlSpringVersion")
-    implementation("com.graphql-java-kickstart:graphql-java-tools:5.3.3")
+    implementation("com.graphql-java-kickstart:graphql-java-tools:5.5.1")
 
     // データベース
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
