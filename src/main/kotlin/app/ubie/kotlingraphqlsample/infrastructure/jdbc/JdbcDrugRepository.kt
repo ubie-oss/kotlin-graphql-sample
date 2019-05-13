@@ -48,4 +48,20 @@ class JdbcDrugRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) :
                 """.trimIndent(), mapOf("yj_codes" to yjCodes), rowMapper
         )
     }
+
+    override fun getDrugsByName(name: String): List<Drug> {
+        if (name.isBlank()) return emptyList()
+        //language=SQL
+        return jdbcTemplate.query(
+                """
+                SELECT
+                  name,
+                  yj_code
+                FROM
+                  drug
+                WHERE
+                  name = :name
+                """.trimIndent(), mapOf("name" to name), rowMapper
+        )
+    }
 }

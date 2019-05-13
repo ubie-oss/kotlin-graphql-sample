@@ -8,4 +8,7 @@ import org.springframework.stereotype.Service
 class DiseaseService(private val repository: DiseaseRepository) {
     fun getDiseases(icd: String): List<Disease> = repository.getDiseases(icd)
     fun getDiseases(icds: List<String>): List<Disease> = repository.getDiseases(icds)
+
+    fun getDiseasesByName(name: String): List<Disease> = repository.getDiseasesByName(name)
+
 }
