@@ -12,4 +12,9 @@ class DiseaseQueryResolver(private val service: DiseaseService) : GraphQLQueryRe
         if (icd.isEmpty()) throw IllegalArgumentException("icd must not be empty")
         return service.getDiseases(icd)
     }
+
+    fun diseasesByName(name: String): List<Disease> {
+        if (name.isEmpty()) throw IllegalArgumentException("name must not be empty")
+        return service.getDiseasesByName(name)
+    }
 }

@@ -45,4 +45,19 @@ class JdbcDiseaseRepository(private val jdbcTemplate: NamedParameterJdbcTemplate
                   icd IN (:icd)
                 """.trimIndent(), mapOf("icd" to targets), rowMapper)
     }
+
+    override fun getDiseasesByName(name: String): List<Disease> {
+        if (name.isBlank()) return emptyList()
+        //language=SQL
+        return jdbcTemplate.query(
+                """
+                SELECT
+                  icd,
+                  name
+                FROM
+                  disease
+                WHERE
+                  name = :name
+                """.trimIndent(), mapOf("name" to name), rowMapper)
+    }
 }

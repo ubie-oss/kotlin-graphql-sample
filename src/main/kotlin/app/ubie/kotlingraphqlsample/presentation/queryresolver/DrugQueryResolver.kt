@@ -8,4 +8,6 @@ import org.springframework.stereotype.Component
 @Component
 class DrugQueryResolver(val drugService: DrugService) : GraphQLQueryResolver {
     fun drugs(yjCode: String): List<Drug> = drugService.getDrugs(yjCode)
+
+    fun drugsByName(name: String): List<Drug> = drugService.getDrugsByName(name)
 }

@@ -5,6 +5,14 @@ type Query {
     diseases(icd: String!) : [Disease!]
 }
 
+extend type Query {
+    # 名前で取得
+    # 薬
+    drugsByName(name: String!) : [Drug!]
+    # 病気
+    diseasesByName(name: String!) : [Disease!]
+}
+
 # 薬情報
 type Drug {
     # 薬品名
