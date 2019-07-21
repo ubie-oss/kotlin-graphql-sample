@@ -1,4 +1,6 @@
 type Query {
+    # 薬をIDを利用して取得します
+    drug(id: ID) : Drug
     # 薬を取得します
     drugs(yjCode: String!) : [Drug!]
     # 病気を取得します
@@ -7,8 +9,12 @@ type Query {
 
 # 薬情報
 type Drug {
+    # id
+    id: ID!
     # 薬品名
     name: String!
+    # 説明
+    description: String
     # YJ Code。だいたい薬を表すために使われるCode。一意ではないので注意
     yjCode: String!
     # 併用禁忌薬
