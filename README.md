@@ -23,10 +23,18 @@
 以下のコマンドを実行します。
 
 ```
-docker-compose up
+./docker-compose up
 ```
 
 起動した状態で http://localhost:8090/graphiql にアクセスすると、GraphiQLにアクセス出来ます。
+
+## localでSpring Boot Appを起動する場合
+
+`docker-compose-middleware.yml`でデータベースを起動して、IntelliJ上でKotlinGraphQLSampleApplicationを実行してください。
+
+```
+docker-compose -f docker-compose-middleware.yml up
+```
 
 ## テスト
 
