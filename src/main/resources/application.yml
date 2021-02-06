@@ -20,6 +20,11 @@ spring:
 graphiql:
   enabled: true
 debug: true
+graphql:
+  servlet:
+    exception-handlers-enabled: true
+    websocket:
+      enabled: false
 logging:
   level:
     root: INFO
