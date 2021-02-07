@@ -1,21 +1,14 @@
 version: '3'
 services:
-  db:
-    image: postgres:9.6.6
-    container_name: sample-db
-    ports:
-    - 5435:5432
-    expose:
-    - 5435
   app:
     image: openjdk:10
     container_name: sample-app
     ports:
     - 8090:8089
-    links:
-    - db
     volumes:
     - .:/app
     - ~/.config/:/root/.config
     working_dir: /app
+    environment:
+      - JDBC_HOST=sample-db
     command: ./gradlew bootRun
