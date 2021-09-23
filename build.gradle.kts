@@ -1,5 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    repositories {
+        maven("https://plugins.gradle.org/m2/")
+    }
+    dependencies {
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:8.0.0")
+    }
+}
+
 plugins {
     id("org.springframework.boot")
     id("org.jetbrains.kotlin.jvm")
@@ -7,8 +16,9 @@ plugins {
     id("org.jetbrains.kotlin.plugin.jpa")
     id("io.spring.dependency-management")
     id("jacoco")
-    id("org.jlleitschuh.gradle.ktlint")
+    id("org.jlleitschuh.gradle.ktlint") version "8.0.0"
     id("org.flywaydb.flyway")
+    // id("org.jlleitschuh.gradle.ktlint")// version "10.2.0"
 }
 
 version = "1.0.0"

@@ -1,7 +1,7 @@
 name: Build
 on: [push]
 jobs:
-  spec:
+  build:
     runs-on: ubuntu-latest
 
     steps:
