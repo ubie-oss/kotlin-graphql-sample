@@ -1,6 +1,6 @@
 # kotlin-graphql-sample
 
-[![CircleCI](https://circleci.com/gh/ubie-inc/kotlin-graphql-sample.svg?style=svg)](https://circleci.com/gh/ubie-inc/kotlin-graphql-sample)
+![](https://github.com/ubie-inc/kotlin-graphql-sample/actions/workflows/build.yml/badge.svg)
 
 これはUbieが開発しているKotlin+SpringBoot+GraphQLのサンプル実装です。
 
