@@ -1,0 +1,29 @@
+name: Build
+on: [push]
+jobs:
+  spec:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+          cache: 'gradle'
+
+      - name: Build
+        run: |
+          ./gradlew ktlintCheck bootJar --no-daemon --max-workers 2
+
+      - name: Test
+        run: |
+          ./gradlew test jacocoTestReport --no-daemon --max-workers 2
+
+      - name: Archive test results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: test-report
+          path: app/build/reports/tests
