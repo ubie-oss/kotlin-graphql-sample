@@ -26,7 +26,7 @@
 ./docker-compose up
 ```
 
-起動した状態で http://localhost:8090/graphiql にアクセスすると、GraphiQLにアクセス出来ます。
+起動した状態で http://localhost:8090/graphql にアクセスすると、GraphiQLにアクセス出来ます。
 
 ## localでSpring Boot Appを起動する場合
 
