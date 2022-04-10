@@ -1,6 +1,7 @@
 # kotlin-graphql-sample
 
 ![](https://github.com/ubie-inc/kotlin-graphql-sample/actions/workflows/build.yml/badge.svg)
+![coverage](docs/coverage.svg)
 
 これはUbieが開発しているKotlin+SpringBoot+GraphQLのサンプル実装です。
 
