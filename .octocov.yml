@@ -2,8 +2,8 @@
 coverage:
   badge:
     path: docs/coverage.svg
-  push:
-  if: true
+push:
+  if: is_default_branch
 testExecutionTime:
   if: true
 diff:
@@ -13,5 +13,5 @@ comment:
   if: is_pull_request
 report:
   if: is_default_branch
-  diff:
-    path: build/reports/jacoco/test
+  datastores:
+    - artifact://${GITHUB_REPOSITORY}
