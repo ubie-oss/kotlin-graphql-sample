@@ -8,11 +8,9 @@ class SampleTest {
     @Nested
     inner class getOne {
         private val sample: Sample = Sample()
-
         @Test
         fun `should get one`() {
             Assertions.assertThat(sample.getOne()).isEqualTo(1)
         }
     }
 }
-
