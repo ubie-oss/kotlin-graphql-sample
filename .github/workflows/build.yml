@@ -21,6 +21,9 @@ jobs:
         run: |
           ./gradlew test jacocoTestReport --no-daemon --max-workers 2
 
+      - name: Coverage
+        uses: k1LoW/octocov-action@v0
+
       - name: Archive test results
         uses: actions/upload-artifact@v2
         if: always()
